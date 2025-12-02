@@ -151,6 +151,8 @@ easyp_inet_connect(void)
 		return ESP_FAIL;
 	}
 
+	esp_netif_set_hostname(s_wifi_netif, CONFIG_EASYP_INET_HOSTNAME);
+
 #if CONFIG_EASYP_INET_NETIF_IP_MODE_STATIC == 1
 	esp_netif_dhcpc_stop(s_wifi_netif);
 	esp_netif_ip_info_t ip_info;

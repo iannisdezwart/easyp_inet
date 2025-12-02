@@ -8,6 +8,12 @@ menu "EaSyP:inet Configuration"
 
     if ENABLE_EASYP_INET
 
+        config EASYP_INET_HOSTNAME
+            string "Hostname"
+            default "esp32"
+            help
+                The hostname to assign to the device.
+
         config EASYP_INET_WIFI_SSID
             string "WiFi SSID"
             default "myssid"
