@@ -1,0 +1,90 @@
+menu "EaSyP:inet Configuration"
+
+    config ENABLE_EASYP_INET
+        bool "Enable EaSyP:inet"
+        default y
+        help
+            Enable EaSyP:inet package for configuring internet connectivity on ESP32 microcontrollers.
+
+    if ENABLE_EASYP_INET
+
+        config EASYP_INET_WIFI_SSID
+            string "WiFi SSID"
+            default "myssid"
+            help
+                SSID (network name) for the example to connect to.
+
+        config EASYP_INET_WIFI_PASSWORD
+            string "WiFi Password"
+            default "mypassword"
+            help
+                WiFi password (WPA or WPA2) for the example to use.
+
+        config EASYP_INET_WIFI_MAX_RETRY
+            int "Maximum retry"
+            default 5
+            help
+                Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+        choice EASYP_INET_WIFI_AUTH_MODE_THRESHOLD
+            prompt "WiFi auth mode threshold"
+            default EASYP_INET_WIFI_AUTH_WPA2_PSK
+            help
+                The weakest authmode to accept.
+
+            config EASYP_INET_WIFI_AUTH_OPEN
+                bool "OPEN"
+            config EASYP_INET_WIFI_AUTH_WEP
+                bool "WEP"
+            config EASYP_INET_WIFI_AUTH_WPA_PSK
+                bool "WPA PSK"
+            config EASYP_INET_WIFI_AUTH_WPA2_PSK
+                bool "WPA2 PSK"
+            config EASYP_INET_WIFI_AUTH_WPA_WPA2_PSK
+                bool "WPA/WPA2 PSK"
+            config EASYP_INET_WIFI_AUTH_WPA3_PSK
+                bool "WPA3 PSK"
+            config EASYP_INET_WIFI_AUTH_WPA2_WPA3_PSK
+                bool "WPA2/WPA3 PSK"
+            config EASYP_INET_WIFI_AUTH_WAPI_PSK
+                bool "WAPI PSK"
+        endchoice
+
+        choice EASYP_INET_NETIF_IP_MODE
+            prompt "Network interface IP mode"
+            default EASYP_INET_NETIF_IP_MODE_DHCP
+            help
+                Select the network interface IP mode.
+
+            config EASYP_INET_NETIF_IP_MODE_DHCP
+                bool "DHCP"
+                help
+                    Use DHCP to obtain IP address.
+
+            config EASYP_INET_NETIF_IP_MODE_STATIC
+                bool "Static"
+                help
+                    Use static IP address.
+        endchoice
+
+        if EASYP_INET_NETIF_IP_MODE_STATIC
+            config EASYP_INET_NETIF_IP4_ADDR
+                string "Static IPv4 address"
+                default "192.168.1.100"
+                help
+                    Static IPv4 address to be set.
+            config EASYP_INET_NETIF_IP4_NETMASK
+                string "Static IPv4 netmask"
+                default "255.255.255.0"
+                help
+                    Static IPv4 netmask to be set.
+            config EASYP_INET_NETIF_IP4_GATEWAY
+                string "Static IPv4 gateway"
+                default "192.168.1.1"
+                help
+                    Static IPv4 gateway to be set.
+        endif # EASYP_INET_NETIF_IP_MODE_STATIC
+
+    endif # ENABLE_EASYP_INET
+
+endmenu

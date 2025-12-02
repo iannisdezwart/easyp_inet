@@ -1,0 +1,6 @@
+version: 1.0.0
+description: EaSyP:inet
+license: GPL-3.0
+maintainers:
+- Iannis de Zwart <info@iannis.io>
+url: https://github.com/iannisdezwart/easyp_inet

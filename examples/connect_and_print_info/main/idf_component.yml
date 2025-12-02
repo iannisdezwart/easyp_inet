@@ -1,0 +1,3 @@
+dependencies:
+  easyp_inet:
+    override_path: ../../..
