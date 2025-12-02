@@ -153,6 +153,13 @@ easyp_inet_connect(void)
 
 	esp_netif_set_hostname(s_wifi_netif, CONFIG_EASYP_INET_HOSTNAME);
 
+#if CONFIG_EASYP_MAC_ADDR_OVERRIDE
+	uint8_t mac[6];
+	sscanf(CONFIG_EASYP_MAC_ADDR, "%hhx:%hhx:%hhx:%hhx:%hhx:%hhx", &mac[0],
+		&mac[1], &mac[2], &mac[3], &mac[4], &mac[5]);
+	esp_wifi_set_mac(WIFI_IF_STA, mac);
+#endif
+
 #if CONFIG_EASYP_INET_NETIF_IP_MODE_STATIC == 1
 	esp_netif_dhcpc_stop(s_wifi_netif);
 	esp_netif_ip_info_t ip_info;

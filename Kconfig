@@ -8,6 +8,20 @@ menu "EaSyP:inet Configuration"
 
     if ENABLE_EASYP_INET
 
+        config EASYP_MAC_ADDR_OVERRIDE
+            bool "Mac Address Override"
+            default false
+            help
+                Override the hardware MAC address.
+
+        if EASYP_MAC_ADDR_OVERRIDE
+            config EASYP_MAC_ADDR
+                string "Mac Address"
+                default "02:00:00:00:00:00"
+                help
+                    The overridden MAC address to assign to the device.
+        endif
+
         config EASYP_INET_HOSTNAME
             string "Hostname"
             default "esp32"
